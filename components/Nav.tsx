@@ -26,6 +26,7 @@ function formatClock(date: Date) {
 export default function Nav() {
   const [hidden, setHidden] = useState(false);
   const [now, setNow] = useState<Date | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- clock has no meaningful value until mounted on the client
@@ -47,10 +48,21 @@ export default function Nav() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <nav className={`nav ${hidden ? "nav-hidden" : "nav-visible"}`}>
       <div className="nav-left">
-        <a href="#top" className="nav-brand">
+        <a href="#top" className="nav-brand" onClick={closeMenu}>
           <img
             src="/menubar-icon.svg"
             alt=""
@@ -58,24 +70,36 @@ export default function Nav() {
           />
           <span>Peekie</span>
         </a>
-        <a href="#features" className="nav-link">
-          Features
-        </a>
-        <a href="#shortcuts" className="nav-link">
-          Shortcuts
-        </a>
-        <a href="#privacy" className="nav-link">
-          Privacy
-        </a>
-        <a href="#faq" className="nav-link">
-          FAQ
-        </a>
-        <a href="https://github.com/maxbenschop/peekie" className="nav-link">
-          GitHub
-        </a>
+        <div id="nav-links" className={`nav-links${menuOpen ? " nav-links-open" : ""}`}>
+          <a href="#features" className="nav-link" onClick={closeMenu}>
+            Features
+          </a>
+          <a href="#shortcuts" className="nav-link" onClick={closeMenu}>
+            Shortcuts
+          </a>
+          <a href="#privacy" className="nav-link" onClick={closeMenu}>
+            Privacy
+          </a>
+          <a href="#faq" className="nav-link" onClick={closeMenu}>
+            FAQ
+          </a>
+          <a href="https://github.com/maxbenschop/peekie" className="nav-link" onClick={closeMenu}>
+            GitHub
+          </a>
+        </div>
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="nav-links"
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span className="nav-toggle-bar" />
+        </button>
       </div>
       <div className="nav-right">
-        <a href="#download" className="btn btn-sm btn-primary" style={{ textShadow: "none" }}>
+        <a href="#download" className="btn btn-sm btn-primary" style={{ textShadow: "none" }} onClick={closeMenu}>
           Download
         </a>
         <span className="nav-clock">{now ? formatClock(now) : ""}</span>

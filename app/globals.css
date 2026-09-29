@@ -121,6 +121,12 @@ input[type="range"] {
   color: #fff;
   font-weight: 700;
 }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
 .nav-link {
   padding: 3px 10px;
   border-radius: 5px;
@@ -139,6 +145,86 @@ input[type="range"] {
 }
 .nav-clock {
   font-variant-numeric: tabular-nums;
+}
+.nav-toggle {
+  display: none;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-left: 2px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+.nav-toggle-bar,
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: currentColor;
+}
+.nav-toggle-bar {
+  position: relative;
+}
+.nav-toggle-bar::before {
+  position: absolute;
+  top: -5px;
+  left: 0;
+}
+.nav-toggle-bar::after {
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+
+@media (max-width: 780px) {
+  .nav-left {
+    flex: 1;
+  }
+  .nav-toggle {
+    display: inline-flex;
+  }
+  .nav-links {
+    position: fixed;
+    top: 32px;
+    left: 0;
+    right: 0;
+    z-index: 19;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 8px clamp(10px, 4vw, 18px) 16px;
+    background: rgba(10, 11, 16, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+  .nav-links.nav-links-open {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links .nav-link {
+    padding: 13px 10px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
 }
 
 /* ---------- buttons ---------- */
@@ -217,6 +303,7 @@ input[type="range"] {
   display: flex;
   flex-direction: column;
   background: #1673c4 url("/wallpaper.jpg") center / cover no-repeat;
+  background: #1673c4 image-set(url("/wallpaper.webp") type("image/webp"), url("/wallpaper.jpg") type("image/jpeg")) center / cover no-repeat;
   overflow: hidden;
 }
 .hero-vignette-side {
@@ -592,6 +679,7 @@ input[type="range"] {
   position: absolute;
   inset: 0;
   background: url("/wallpaper.jpg") 55% 35% / cover;
+  background: image-set(url("/wallpaper.webp") type("image/webp"), url("/wallpaper.jpg") type("image/jpeg")) 55% 35% / cover;
   transform: scale(1.5);
 }
 .away-card {
@@ -711,6 +799,7 @@ input[type="range"] {
   border-radius: 22px;
   overflow: hidden;
   background: url("/wallpaper.jpg") 30% 20% / cover;
+  background: image-set(url("/wallpaper.webp") type("image/webp"), url("/wallpaper.jpg") type("image/jpeg")) 30% 20% / cover;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
 }
 .appearance-window {
@@ -806,6 +895,37 @@ input[type="range"] {
   color: var(--muted);
 }
 
+/* ---------- legal (privacy page) ---------- */
+.legal-heading {
+  margin: 0;
+  font-family: var(--font-nunito), sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+.legal-block {
+  margin-top: 16px;
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.legal-block p + p {
+  margin-top: 14px;
+}
+.legal-block strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+.legal-list {
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+.legal-list li {
+  margin-top: 8px;
+}
+
 /* ---------- faq ---------- */
 .faq-section {
   display: grid;
@@ -829,11 +949,23 @@ input[type="range"] {
   font-weight: 600;
   color: var(--fg);
 }
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+.faq-question::marker {
+  content: "";
+}
 .faq-sign {
   flex: none;
   font-size: 20px;
   font-weight: 400;
   color: #8d93a0;
+}
+.faq-sign::before {
+  content: "+";
+}
+.faq-item[open] .faq-sign::before {
+  content: "\2212";
 }
 .faq-answer {
   margin: 0;
@@ -852,6 +984,7 @@ input[type="range"] {
   display: flex;
   flex-direction: column;
   background: #1673c4 url("/wallpaper.jpg") center / cover no-repeat;
+  background: #1673c4 image-set(url("/wallpaper.webp") type("image/webp"), url("/wallpaper.jpg") type("image/jpeg")) center / cover no-repeat;
   overflow: hidden;
 }
 .download-vignette-top {

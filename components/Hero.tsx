@@ -13,7 +13,18 @@ const LINES: Line[] = [
 ];
 
 function wait(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise<void>((resolve) => {
+    const settle = () => {
+      // Pause the animation loop while the tab is hidden instead of
+      // burning CPU in the background.
+      if (typeof document !== "undefined" && document.hidden) {
+        document.addEventListener("visibilitychange", settle, { once: true });
+        return;
+      }
+      resolve();
+    };
+    setTimeout(settle, ms);
+  });
 }
 
 function buildHeroLines(hN: number, hChecked: boolean[], hAnswer: boolean, hWin: boolean) {

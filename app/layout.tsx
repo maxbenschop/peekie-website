@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Nunito, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
+import { getLatestRelease } from "@/lib/github";
+import { FAQS } from "@/lib/faqs";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -78,33 +80,51 @@ export const viewport = {
   themeColor: "#0d0f14",
 };
 
-const jsonLd = {
+const faqJsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Peekie",
-  operatingSystem: "macOS 14+",
-  applicationCategory: "ProductivityApplication",
-  description: SITE_DESCRIPTION,
-  url: SITE_URL,
-  downloadUrl: "https://github.com/maxbenschop/peekie/releases/latest",
-  sameAs: ["https://github.com/maxbenschop/peekie"],
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-  },
-  author: {
-    "@type": "Person",
-    name: "Max Benschop",
-  },
-  license: "https://github.com/maxbenschop/peekie/blob/main/LICENSE",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map(([question, answer]) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const release = await getLatestRelease();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Peekie",
+    operatingSystem: "macOS 14+",
+    applicationCategory: "UtilitiesApplication",
+    softwareVersion: release.version,
+    image: `${SITE_URL}/icon.svg`,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    downloadUrl: "https://github.com/maxbenschop/peekie/releases/latest",
+    sameAs: ["https://github.com/maxbenschop/peekie"],
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    author: {
+      "@type": "Person",
+      name: "Max Benschop",
+    },
+    license: "https://github.com/maxbenschop/peekie/blob/main/LICENSE",
+  };
+
   return (
     <html lang="en" className={`${nunito.variable} ${jetbrainsMono.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         {children}
       </body>
     </html>

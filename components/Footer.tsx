@@ -7,6 +7,9 @@ export default function Footer() {
           <span>Peekie · MIT © Max Benschop</span>
         </div>
         <span className="footer-divider" />
+        <a href="/privacy" className="footer-link">
+          Privacy
+        </a>
         <a href="https://github.com/maxbenschop/peekie" className="footer-link">
           GitHub
         </a>

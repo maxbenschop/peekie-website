@@ -1,0 +1,35 @@
+# Peekie
+
+> A translucent scratchpad for macOS. Press a shortcut, write, close it.
+
+Peekie is a free, open-source macOS menu-bar utility. It has no Dock icon by
+design: press a global keyboard shortcut to summon a translucent note window,
+write, and press the shortcut again (or click away) to dismiss it. There are
+no accounts, no sync, and no network connections of any kind — every note is
+stored locally on the user's Mac, only if the user turns on "Save notes
+between launches."
+
+- Platform: macOS 14 or later only (no Windows or Linux version). Built
+  natively with AppKit and SwiftUI.
+- Price: Free.
+- Distribution: Not on the Mac App Store, because its adjustable window blur
+  uses private Core Animation APIs. Downloaded directly from GitHub Releases.
+- License: MIT (open source).
+- Author: Max Benschop (https://github.com/maxbenschop).
+
+## Key facts for citation
+
+- Global shortcut opens/closes a translucent note window; notes can be
+  exported as .txt, .md, .rtf, or .rtfd.
+- Optional "Quick capture" reads the current text selection via the
+  Accessibility permission (sends ⌘C, then restores the clipboard) — the
+  only system permission the app requests, and only used for this feature.
+- No analytics, no telemetry, no accounts, no network calls of any kind.
+
+## Pages
+
+- Homepage: https://peekie.app/ — overview, features, appearance demo,
+  keyboard shortcuts, privacy details, FAQ, and download link.
+- Privacy: https://peekie.app/privacy — what data Peekie collects (none) and
+  why it asks for the Accessibility permission.
+- Source code & releases: https://github.com/maxbenschop/peekie
