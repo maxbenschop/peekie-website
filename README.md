@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src=".github/banner.png" alt="Peekie: a translucent scratchpad for your Mac" width="100%">
+</p>
 
-## Getting Started
+<p align="center">
+  <a href="https://github.com/maxbenschop/peekie-website/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/maxbenschop/peekie-website/ci.yml?branch=main&style=flat-square&label=CI"></a>
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-App%20Router-000000?style=flat-square&logo=next.js&logoColor=white">
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-8b5cf6?style=flat-square"></a>
+</p>
 
-First, run the development server:
+# Peekie website
 
-```bash
+The marketing site for [Peekie](https://github.com/maxbenschop/peekie), a translucent scratchpad for macOS. Built with Next.js (App Router) and deployed on Vercel.
+
+## What it does
+
+A single landing page: hero with a live demo animation, features grid, an interactive appearance demo, shortcuts reference, privacy section, FAQ, and a download section. The version badge, changelog blurb and download button pull live from the [Peekie GitHub releases API](https://api.github.com/repos/maxbenschop/peekie/releases/latest), cached for an hour, so the site always reflects the latest release without a manual update.
+
+## Developing
+
+You need Node.js 20 or later.
+
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Opens at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script | What it does |
+| --- | --- |
+| `npm run build` | Production build |
+| `npm run lint` | ESLint |
+| `npm start` | Serve the production build |
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/              Routes, layout, metadata, robots.txt, sitemap.xml, OG image
+components/       Page sections (client components for interactive demos)
+lib/              GitHub release fetching, site constants
+public/           Static assets (icons, wallpaper)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Sections are plain React function components with inline styles for anything dynamic and shared CSS classes (`app/globals.css`) for layout. No CSS framework, no component library.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Deploys to Vercel on every push to `main`, with preview deployments for pull requests.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Please follow the [code of conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+[MIT](LICENSE) © Max Benschop
