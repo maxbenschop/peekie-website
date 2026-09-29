@@ -81,7 +81,7 @@ export default function PrivacyPage() {
         <div className="legal-block">
           <p>
             Peekie the app collects nothing, but this website is hosted on Vercel, and like virtually any web
-            host, Vercel's servers log basic technical information for every visit — your IP address, browser
+            host, Vercel’s servers log basic technical information for every visit — your IP address, browser
             user-agent, the page requested, and the timestamp — as a normal part of operating and securing the
             site. An IP address is considered personal data under the GDPR (in the Netherlands, the AVG).
           </p>
@@ -95,14 +95,14 @@ export default function PrivacyPage() {
             is nothing non-essential to consent to, so there is no cookie banner.
           </p>
           <p>
-            <strong>Fonts, served locally.</strong> This site's fonts are bundled and served from peekie.app
+            <strong>Fonts, served locally.</strong> This site’s fonts are bundled and served from peekie.app
             itself at build time, not loaded live from Google Fonts — so no font request ever reaches a third
             party or leaks your IP address to one.
           </p>
           <p>
             <strong>Hosting and international transfer.</strong> Vercel Inc. is based in the United States and
             acts as the processor of the server logs described above. Transfers of this kind rely on Standard
-            Contractual Clauses; see Vercel's own Data Processing Addendum for details of their safeguards and
+            Contractual Clauses; see Vercel’s own Data Processing Addendum for details of their safeguards and
             log-retention practices, which this project does not independently control.
           </p>
         </div>
@@ -120,7 +120,7 @@ export default function PrivacyPage() {
         </div>
 
         <h2 className="legal-heading" style={{ marginTop: 56 }}>
-          Who's responsible for this
+          Who’s responsible for this
         </h2>
         <p className="section-subtitle" style={{ marginTop: 16 }}>
           This site and the Peekie app are made by Max Benschop, acting as an individual open-source maintainer,
