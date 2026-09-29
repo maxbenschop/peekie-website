@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 function formatClock(date: Date) {
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -24,6 +25,8 @@ function formatClock(date: Date) {
 }
 
 export default function Nav() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [hidden, setHidden] = useState(false);
   const [now, setNow] = useState<Date | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,7 +65,7 @@ export default function Nav() {
   return (
     <nav className={`nav ${hidden ? "nav-hidden" : "nav-visible"}`}>
       <div className="nav-left">
-        <a href="#top" className="nav-brand" onClick={closeMenu}>
+        <a href={isHome ? "#top" : "/"} className="nav-brand" onClick={closeMenu}>
           <img
             src="/menubar-icon.svg"
             alt=""
