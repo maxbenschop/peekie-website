@@ -11,7 +11,12 @@ async function loadFont(file: string) {
 }
 
 export default async function Image() {
-  const [black, semiBold] = await Promise.all([loadFont("Nunito-Black.ttf"), loadFont("Nunito-SemiBold.ttf")]);
+  const [black, semiBold, iconBuf] = await Promise.all([
+    loadFont("Nunito-Black.ttf"),
+    loadFont("Nunito-SemiBold.ttf"),
+    readFile(path.join(process.cwd(), "assets/reference/app-icon.png")),
+  ]);
+  const iconSrc = `data:image/png;base64,${iconBuf.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -24,78 +29,17 @@ export default async function Image() {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
-          background: "#0d0f14",
+          background:
+            "radial-gradient(650px 450px at 78% 20%, rgba(59,130,246,0.36), transparent 60%), radial-gradient(500px 400px at 95% 60%, rgba(139,92,246,0.28), transparent 60%), #14171e",
           fontFamily: "Nunito",
           overflow: "hidden",
         }}
       >
-        {[
-          { top: -520, left: 380, size: 1500, color: "rgba(105,90,215,0.3)" },
-          { top: -180, left: 780, size: 1300, color: "rgba(45,105,205,0.24)" },
-        ].map((c, i) => (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              top: c.top,
-              left: c.left,
-              width: c.size,
-              height: c.size,
-              borderRadius: "50%",
-              background: c.color,
-              display: "flex",
-              filter: "blur(140px)",
-            }}
-          />
-        ))}
-
+        <img src={iconSrc} alt="" width={128} height={128} style={{ display: "flex" }} />
         <div
           style={{
             position: "relative",
-            display: "flex",
-            width: 128,
-            height: 128,
-            borderRadius: 30,
-            background: "linear-gradient(#3c414d, #14161b)",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 20px 44px rgba(0,0,0,0.5)",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              width: 70,
-              height: 70,
-              borderRadius: 20,
-              background: "#fff",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 12,
-            }}
-          >
-            {[0, 1].map((i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  width: 18,
-                  height: 26,
-                  borderRadius: 9,
-                  background: "radial-gradient(circle at 40% 32%, #363b47, #1c1f27)",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <div style={{ display: "flex", width: 8, height: 8, borderRadius: "50%", background: "#fff" }} />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div
-          style={{
-            position: "relative",
-            marginTop: 36,
+            marginTop: 32,
             fontSize: 84,
             fontWeight: 900,
             color: "#fff",

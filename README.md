@@ -34,14 +34,18 @@ Other scripts:
 | `npm run build` | Production build |
 | `npm run lint` | ESLint |
 | `npm start` | Serve the production build |
+| `npm run generate:banner` | Regenerate `.github/banner.png` from `scripts/generate-banner.mjs` |
 
 ## Structure
 
 ```
-app/              Routes, layout, metadata, robots.txt, sitemap.xml, OG image
-components/       Page sections (client components for interactive demos)
-lib/              GitHub release fetching, site constants
-public/           Static assets (icons, wallpaper)
+app/                  Routes, layout, metadata, robots.txt, sitemap.xml, OG image
+components/           Page sections (client components for interactive demos)
+lib/                  GitHub release fetching, site constants
+public/               Static assets served by the site (icons, wallpaper)
+assets/fonts/         Static Nunito weights used by the OG image and the banner script
+assets/reference/     The Peekie app icon, used only to render the README banner
+scripts/              Asset generation (see generate:banner above)
 ```
 
 Sections are plain React function components with inline styles for anything dynamic and shared CSS classes (`app/globals.css`) for layout. No CSS framework, no component library.

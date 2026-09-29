@@ -18,12 +18,17 @@ A few principles guide this site. Changes that fit them are much easier to accep
 
 You need Node.js 20 or later.
 
+1. Fork this repository on GitHub (the **Fork** button, top right of the repo page).
+2. Clone your fork, replacing `your-username` with your own GitHub username:
+
 ```sh
-git clone https://github.com/<your-username>/peekie-website.git
+git clone https://github.com/your-username/peekie-website.git
 cd peekie-website
 npm install
 npm run dev
 ```
+
+You push branches and open pull requests from your fork; you don't need write access to this repository for that.
 
 ## Code style
 
@@ -34,10 +39,10 @@ npm run dev
 
 ## Pull requests
 
-1. Fork the repository and create a branch from `main`.
+1. Create a branch from `main` in your fork.
 2. Make your change.
 3. Run `npm run lint` and `npm run build` and make sure both pass.
-4. Open a pull request. A screenshot helps a lot for anything visual, especially at phone width.
+4. Open a pull request against `maxbenschop/peekie-website:main`. A screenshot helps a lot for anything visual, especially at phone width.
 
 Write commit messages in the imperative mood ("Fix mobile spacing on hero", not "Fixed"). Keep pull requests focused: one change per pull request is easier to review and easier to revert.
 
